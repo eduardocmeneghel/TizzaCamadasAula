@@ -5,10 +5,10 @@ namespace Servicos
 {
     public interface IServPizzaria
     {
-
+        void Inserir(InserirPizzariaDTO inserirPizzariaDto);
     }
 
-    public class ServPizzaria
+    public class ServPizzaria : IServPizzaria
     {
         private IRepoPizzaria _repoPizzaria;
 
