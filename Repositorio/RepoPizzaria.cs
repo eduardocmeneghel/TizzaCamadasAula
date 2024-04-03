@@ -5,6 +5,7 @@ namespace Repositorio
     public interface IRepoPizzaria
     {
         void Inserir(Pizzaria pizzaria);
+        List<Pizzaria> BuscarTodos();
     }
 
     public class RepoPizzaria : IRepoPizzaria
@@ -21,6 +22,13 @@ namespace Repositorio
             _dataContext.Add(pizzaria);
 
             _dataContext.SaveChanges();
+        }
+
+        public List<Pizzaria> BuscarTodos()
+        {
+            var pizzarias = _dataContext.Pizzaria.ToList();
+
+            return pizzarias;
         }
     }
 }

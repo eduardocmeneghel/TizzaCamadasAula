@@ -6,6 +6,7 @@ namespace Servicos
     public interface IServPizzaria
     {
         void Inserir(InserirPizzariaDTO inserirPizzariaDto);
+        List<Pizzaria> BuscarTodos();
     }
 
     public class ServPizzaria : IServPizzaria
@@ -36,6 +37,13 @@ namespace Servicos
             {
                 throw new Exception("Nome inválido. Deve possuir no mínimo 40 caracteres.");
             }
+        }
+
+        public List<Pizzaria> BuscarTodos()
+        {
+            var pizzarias = _repoPizzaria.BuscarTodos();
+
+            return pizzarias;
         }
     }
 }
