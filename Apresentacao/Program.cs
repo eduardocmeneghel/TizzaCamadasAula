@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Repositorio;
+using Servicos;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +14,9 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<DataContext>(option =>
     option.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("Apresentacao"))
 );
+
+builder.Services.AddScoped<IServPizzaria, ServPizzaria>();
+builder.Services.AddScoped<IRepoPizzaria, RepoPizzaria>();
 
 var app = builder.Build();
 

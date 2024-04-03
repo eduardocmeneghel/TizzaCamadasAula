@@ -5,10 +5,10 @@ namespace Servicos
 {
     public interface IServPizzaria
     {
-
+        void Inserir(InserirPizzariaDTO inserirPizzariaDto);
     }
 
-    public class ServPizzaria
+    public class ServPizzaria : IServPizzaria
     {
         private IRepoPizzaria _repoPizzaria;
 
@@ -25,7 +25,17 @@ namespace Servicos
             pizzaria.Telefone = inserirPizzariaDto.Telefone;
             pizzaria.Endereco = inserirPizzariaDto.Endereco;
 
+            ValidacoesAntesDeInserir(pizzaria);
+
             _repoPizzaria.Inserir(pizzaria);
+        }
+
+        public void ValidacoesAntesDeInserir(Pizzaria pizzaria)
+        {
+            if (pizzaria.Nome.Length < 40)
+            {
+                throw new Exception("Nome inválido. Deve possuir no mínimo 40 caracteres.");
+            }
         }
     }
 }
