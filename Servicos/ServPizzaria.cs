@@ -6,7 +6,9 @@ namespace Servicos
     public interface IServPizzaria
     {
         void Inserir(InserirPizzariaDTO inserirPizzariaDto);
+        void Editar(int id, EditarPizzariaDTO editarPizzariaDto);
         List<Pizzaria> BuscarTodos();
+        Pizzaria BuscarPorId(int id);
         void Remover(int id);
 
         void AtualizarInformacoesDaPromocao(int id, DateTime dataVigenciaPromocao, decimal valorPromocao);
@@ -42,12 +44,31 @@ namespace Servicos
             }
         }
 
+        public void Editar(int id, EditarPizzariaDTO editarPizzariaDto)
+        {
+            var pizzaria = _repoPizzaria.BuscarPorId(id);
+
+            pizzaria.Nome = editarPizzariaDto.Nome;
+            pizzaria.Telefone = editarPizzariaDto.Telefone;
+            pizzaria.Endereco = editarPizzariaDto.Endereco;
+
+            _repoPizzaria.Editar(pizzaria);
+        }
+
         public List<Pizzaria> BuscarTodos()
         {
             var pizzarias = _repoPizzaria.BuscarTodos();
 
             return pizzarias;
         }
+
+        public Pizzaria BuscarPorId(int id)
+        {
+            var pizzaria = _repoPizzaria.BuscarPorId(id);
+
+            return pizzaria;
+        }
+
 
         public void Remover(int id)
         {

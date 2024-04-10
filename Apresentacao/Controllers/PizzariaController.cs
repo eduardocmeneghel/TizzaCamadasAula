@@ -29,6 +29,22 @@ namespace Apresentacao
             }
         }
 
+        [Route("/api/[controller]/{id}")]
+        [HttpPut]
+        public IActionResult Editar(int id, [FromBody]EditarPizzariaDTO editarDto)
+        {
+            try
+            {
+                _servPizzaria.Editar(id, editarDto);
+
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
         [HttpGet]
         public IActionResult BuscarTodos()
         {
@@ -44,6 +60,22 @@ namespace Apresentacao
                     }).ToList();
 
                 return Ok(pizzariaEnxuta);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [Route("/api/[controller]/{id}")]
+        [HttpGet]
+        public IActionResult BuscarPorId(int id)
+        {
+            try
+            {
+                var pizzaria = _servPizzaria.BuscarPorId(id);
+
+                return Ok(pizzaria);
             }
             catch (Exception e)
             {
