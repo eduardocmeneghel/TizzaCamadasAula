@@ -7,6 +7,9 @@ namespace Servicos
     {
         void Inserir(InserirPizzariaDTO inserirPizzariaDto);
         List<Pizzaria> BuscarTodos();
+        void Remover(int id);
+
+        void AtualizarInformacoesDaPromocao(int id, DateTime dataVigenciaPromocao, decimal valorPromocao);
     }
 
     public class ServPizzaria : IServPizzaria
@@ -44,6 +47,21 @@ namespace Servicos
             var pizzarias = _repoPizzaria.BuscarTodos();
 
             return pizzarias;
+        }
+
+        public void Remover(int id)
+        {
+            var pizzaria = _repoPizzaria.BuscarTodos().Where(p => p.Id == id).FirstOrDefault();
+
+            _repoPizzaria.Remover(pizzaria);
+        }
+
+        public void AtualizarInformacoesDaPromocao(int id, DateTime dataVigenciaPromocao, decimal valorPromocao)
+        {
+            var pizzaria = _repoPizzaria.BuscarTodos().Where(p => p.Id == id).FirstOrDefault();
+
+            pizzaria.DataVigenciaPromover = dataVigenciaPromocao;
+            pizzaria.ValorPromover = valorPromocao;
         }
     }
 }

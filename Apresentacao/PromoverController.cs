@@ -1,25 +1,42 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Entidades;
+using Microsoft.AspNetCore.Mvc;
 using Servicos;
 
 namespace Apresentacao
 {
     [Route("api/[Controller]")]
     [ApiController]
-    public class PizzariaController : ControllerBase
+    public class PromoverController : ControllerBase
     {
-        private IServPizzaria _servPizzaria;
+        private IServPromover _servPromover;
 
-        public PizzariaController(IServPizzaria servPizzaria)
+        public PromoverController(IServPromover servPromover)
         {
-            _servPizzaria = servPizzaria;
+            _servPromover = servPromover;
         }
 
         [HttpPost]
-        public ActionResult Inserir(InserirPizzariaDTO inserirDto)
+        public ActionResult Inserir(InserirPromoverDTO inserirDto)
         {
             try
             {
-                _servPizzaria.Inserir(inserirDto);
+                _servPromover.Inserir(inserirDto);
+
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [Route("/api/[Controller]/Efetivar/{id}")]
+        [HttpPost]
+        public ActionResult Efetivar(int id)
+        {
+            try
+            {
+                _servPromover.Efetivar(id);
 
                 return Ok();
             }
@@ -34,16 +51,16 @@ namespace Apresentacao
         {
             try
             {
-                var pizzarias = _servPizzaria.BuscarTodos();
+                /*var pizzarias = _servPizzaria.BuscarTodos();
 
                 var pizzariaEnxuta = pizzarias.Select(p =>
                     new
                     {
                         Id = p.Id,
                         Nome = p.Nome
-                    }).ToList();
+                    }).ToList();*/
 
-                return Ok(pizzariaEnxuta);
+                return Ok();
             }
             catch (Exception e)
             {
@@ -57,7 +74,7 @@ namespace Apresentacao
         {
             try
             {
-                _servPizzaria.Remover(id);
+                //_servPizzaria.Remover(id);
 
                 return Ok();
             }
