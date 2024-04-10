@@ -45,43 +45,5 @@ namespace Apresentacao
                 return BadRequest(e.Message);
             }
         }
-
-        [HttpGet]
-        public IActionResult BuscarTodos()
-        {
-            try
-            {
-                /*var pizzarias = _servPizzaria.BuscarTodos();
-
-                var pizzariaEnxuta = pizzarias.Select(p =>
-                    new
-                    {
-                        Id = p.Id,
-                        Nome = p.Nome
-                    }).ToList();*/
-
-                return Ok();
-            }
-            catch (Exception e)
-            {
-                return BadRequest(e.Message);
-            }
-        }
-
-        [Route("/api/[controller]/{id}")]
-        [HttpDelete]
-        public IActionResult Remover(int id)
-        {
-            try
-            {
-                //_servPizzaria.Remover(id);
-
-                return Ok();
-            }
-            catch (Exception e)
-            {
-                return BadRequest(e.Message);
-            }
-        }
     }
 }
